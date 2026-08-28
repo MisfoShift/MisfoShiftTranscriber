@@ -10,6 +10,8 @@ MisfoShiftTranscriber Windows artifacts are currently unsigned. This repository 
 - An RFC 3161 timestamp service supported by the certificate provider.
 - Protected CI secrets or workload identity if signing is automated.
 
+The certificate subject and Windows publisher display should represent `MisfoShift`. Confirm the final wording with the certificate issuer before purchase because the displayed subject is derived from the issued certificate, not only from Tauri metadata.
+
 ## Tauri configuration points
 
 Tauri 2 supports these fields under `bundle.windows` in `src-tauri/tauri.conf.json`:

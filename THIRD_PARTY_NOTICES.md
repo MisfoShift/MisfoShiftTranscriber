@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-MisfoShiftTranscriber can download or use the following independent components. These components are not relicensed under MisfoShiftTranscriber's license.
+MisfoShiftTranscriber is published by MisfoShift and can download or use the following independent components. These components are not relicensed under MisfoShiftTranscriber's license.
 
 ## whisper.cpp
 

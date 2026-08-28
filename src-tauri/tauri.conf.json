@@ -16,6 +16,7 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "publisher": "MisfoShift",
     "copyright": "Copyright © 2026 MisfoShift",
     "license": "MIT",
     "licenseFile": "windows/LICENSE.txt",

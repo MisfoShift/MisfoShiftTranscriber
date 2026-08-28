@@ -2,6 +2,7 @@
   "name": "misfo-shift-transcriber",
   "private": true,
   "version": "0.1.0",
+  "author": "MisfoShift",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -33,6 +33,8 @@ npm run tauri:build:windows
 
 The default bundle must contain the app, `LICENSE`, and `THIRD_PARTY_NOTICES.md`. It must not contain downloaded whisper.cpp binaries, Whisper model files, or FFmpeg binaries. `bundle.resources` makes both notice files readable after installation. The en-US WiX database uses code page 1252, so its license screen uses `src-tauri/windows/LICENSE.txt`, an English-only copy of the legally controlling MIT text from the repository `LICENSE`; the installed `LICENSE` retains the Japanese reference translation as well.
 
+The Windows installer Manufacturer/Publisher metadata must be `MisfoShift`, and the application identifier must be `com.misfoshift.transcriber`. Treat changes to either value as release-significant because they can affect installer identity and the application-data directory.
+
 ## Content Security Policy
 
 The current UI loads styles from the packaged `src/styles.css` and does not use inline `<style>`, `style=` attributes, or DOM `.style` assignments. Therefore `style-src` is restricted to `'self'` without `'unsafe-inline'`. Recheck the CSP whenever inline styling or a UI framework that injects styles is introduced.
