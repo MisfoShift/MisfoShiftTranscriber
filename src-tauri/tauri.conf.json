@@ -11,13 +11,19 @@
   },
   "app": {
     "windows": [{ "title": "MisfoShiftTranscriber", "width": 920, "height": 820, "minWidth": 680, "minHeight": 700, "resizable": true }],
-    "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline';" }
+    "security": { "csp": "default-src 'self'; style-src 'self';" }
   },
   "bundle": {
     "active": true,
     "targets": "all",
     "copyright": "Copyright © 2026 MisfoShift",
-    "resources": ["../THIRD_PARTY_NOTICES.md"],
+    "license": "MIT",
+    "licenseFile": "windows/LICENSE.txt",
+    "homepage": "https://misfoshift.com",
+    "resources": {
+      "../LICENSE": "LICENSE",
+      "../THIRD_PARTY_NOTICES.md": "THIRD_PARTY_NOTICES.md"
+    },
     "icon": [
       "icons/icon.ico",
       "icons/icon.icns",

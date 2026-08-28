@@ -58,7 +58,7 @@ MisfoShiftTranscriberは、Windows上で音声をローカル文字起こしす�
 | --- | --- | --- | --- |
 | whisper.cpp 1.9.0 | ggml-org公式GitHub Releases | MIT | 不足時に自動取得 |
 | ggml-small / medium / large-v3 | ggerganov/whisper.cpp on Hugging Face | MIT | ユーザー選択で自動取得 |
-| FFmpeg / BtbN Windows x64 GPL build | BtbN公式GitHub Releases | GPL-3.0-or-later | 既存版を自動検出し、不足時にユーザー操作で取得 |
+| FFmpeg / BtbN Windows x64 LGPL build | BtbN公式GitHub Releases | LGPL-3.0-or-later | 既存版を自動検出し、不足時にユーザー操作で取得 |
 
 詳細な固定バージョン、ハッシュ、Public配布時の注意点は[docs/COMPONENTS.md](docs/COMPONENTS.md)と[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)を参照してください。
 
@@ -96,6 +96,8 @@ npm run tauri:build:windows
 
 標準のWindows配布物には、whisper.cpp、Whisperモデル、FFmpegを含めません。配布物にはアプリ本体、UI、コンポーネント取得定義、第三者ライセンス情報、アプリアイコンを含めます。`transcriber.png`をアイコンの元画像として保持し、`src-tauri/icons/`の生成済みアイコンをWindows実行ファイルとインストーラーのビルドに使用します。
 
+MSI / NSISにはアプリ本体の`LICENSE`と`THIRD_PARTY_NOTICES.md`を含めます。リリース前の監査、SHA-256生成、配布確認は[リリース手順](docs/RELEASING.md)と[手動確認チェックリスト](docs/RELEASE_CHECKLIST.md)を参照してください。Windowsコード署名は現在未導入で、将来の導入ポイントは[Windowsコード署名手順](docs/WINDOWS_CODE_SIGNING.md)に整理しています。
+
 ## 構成
 
 ```text
@@ -127,4 +129,4 @@ src-tauri/
 
 ## ライセンス
 
-アプリのソースコードは[LICENSE](LICENSE)を参照してください。第三者コンポーネントにはそれぞれのライセンスが適用されます。標準配布ではFFmpegバイナリを同梱しません。将来同梱へ変更する場合は、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)に記載した対応ソース提供などのGPL条件を満たしてください。
+アプリのソースコードは[LICENSE](LICENSE)を参照してください。オリジナル画像`transcriber.png`と、その画像から生成した`src-tauri/icons/`内のアプリアイコンもアプリ本体と同じMITライセンスで公開します。第三者コンポーネントにはそれぞれのライセンスが適用されます。標準配布ではFFmpegバイナリを同梱しません。将来同梱へ変更する場合は、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)に記載したLGPL条件を満たしてください。

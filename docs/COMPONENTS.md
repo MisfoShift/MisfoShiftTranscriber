@@ -28,18 +28,18 @@ For every component update:
 5. Review the upstream license and build configuration.
 6. Update `components.json`, `THIRD_PARTY_NOTICES.md`, and relevant README text together.
 7. Test a clean install, interrupted download, digest mismatch, re-download, and offline transcription.
-8. Keep whisper.cpp, model files, and FFmpeg out of the default application bundle. If a future release bundles FFmpeg, archive and publish the complete corresponding source and build definitions required by the GPL.
+8. Keep whisper.cpp, model files, and FFmpeg out of the default application bundle. If a future release bundles FFmpeg, archive its license text, corresponding source, and matching BtbN build definitions as required by the LGPL.
 
 ## Network policy
 
 The component manager must not contact any server during normal startup or transcription. Network access occurs only after a user selects download, re-download, or recommended setup.
 
-Downloads are written to a temporary directory under the application-data component root. An artifact is installed only after its digest is verified. ZIP paths are constrained to the temporary extraction root, symbolic links are rejected, and extraction size is bounded by the manifest. Existing installations remain available until a verified replacement is ready.
+Downloads are written to a temporary directory under the application-data component root. An artifact is installed only after its digest is verified. The HTTP body is limited to the manifest download size plus 5%, with a minimum 8 MiB tolerance, and never beyond `required_space_bytes`. A larger `Content-Length` is rejected before writing; a streaming response that crosses the limit is stopped and its temporary file is removed. ZIP paths are constrained to the temporary extraction root, symbolic links are rejected, and extraction size is bounded by the manifest. Existing installations remain available until a verified replacement is ready.
 
 ## Current component set
 
 - whisper.cpp `1.9.0`, Windows x64 CPU release, MIT.
 - Whisper `small`, `medium`, and `large-v3` multilingual ggml models, MIT-designated upstream repository.
-- BtbN FFmpeg `n8.1.2-44-g7c533d0f86` Windows x64 GPL static build, GPL-3.0-or-later.
+- BtbN FFmpeg `n8.1.2-44-g7c533d0f86` Windows x64 LGPL static build, LGPL-3.0-or-later.
 
 See `THIRD_PARTY_NOTICES.md` for the exact artifacts and redistribution notes.

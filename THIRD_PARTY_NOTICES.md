@@ -39,18 +39,19 @@ MisfoShiftTranscriber can use an existing FFmpeg executable or download the pinn
 - FFmpeg source: <https://ffmpeg.org/download.html>
 - Build project: <https://github.com/BtbN/FFmpeg-Builds>
 - Build release tag: `autobuild-2026-08-16-13-00`
-- FFmpeg version/build identifier: `n8.1.2-44-g7c533d0f86-20260815`
+- FFmpeg version/build identifier: `n8.1.2-44-g7c533d0f86-20260816`
 - FFmpeg source revision: `7c533d0f86`
 - BtbN FFmpeg-Builds commit: `590a6612d7d961e9258429e501619e0b7d7cbedf`
-- Artifact: `ffmpeg-n8.1.2-44-g7c533d0f86-win64-gpl-8.1.zip`
-- Artifact SHA-256: `d2425b12dc746a2b044148c6100440d4065876ac4ed6e3eb13a68437b7719796`
-- Build options include `--enable-gpl --enable-version3`; `--enable-nonfree` is not enabled
-- Binary license: GNU General Public License, version 3 or later (`GPL-3.0-or-later`)
-- GPL text: <https://www.gnu.org/licenses/gpl-3.0.html>
+- Artifact: `ffmpeg-n8.1.2-44-g7c533d0f86-win64-lgpl-8.1.zip`
+- Artifact size: `146,088,248` bytes
+- Artifact SHA-256: `907a6bbc7aa100f5392309c5be4f527d12241121eda1c46db1c62b0054019db1`
+- Build options include `--enable-version3`; `--enable-gpl` and `--enable-nonfree` are not enabled
+- Binary license: GNU Lesser General Public License, version 3 or later (`LGPL-3.0-or-later`)
+- LGPL text: <https://www.gnu.org/licenses/lgpl-3.0.html>
 - Exact revision lookup: <https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/7c533d0f86>
 
 FFmpeg is executed as an external program. The application downloads the unmodified archive directly from the BtbN GitHub Release and verifies the pinned digest. Downloading a binary on a user's machine does not place it in this source repository.
 
-If a future MisfoShiftTranscriber Release redistributes the FFmpeg binary, the distributor must comply with the GPL. At minimum, include the unmodified license text and this notice, and provide the complete corresponding source for the exact FFmpeg revision, dependencies, and matching BtbN build definitions in the manner required by the license. A GitHub-generated `Source code (zip)` for BtbN alone is not the complete corresponding source for the produced FFmpeg binary. Do not distribute a build made with `--enable-nonfree`.
+If a future MisfoShiftTranscriber Release redistributes the FFmpeg binary, the distributor must comply with the LGPL. Preserve the upstream notices, include the applicable license text, and make the corresponding source and build information available in the manner required by the license. FFmpeg remains a separate executable invoked by the application and is not included in the default bundle. Do not substitute a build made with `--enable-gpl` or `--enable-nonfree` without a new license review.
 
 This notice is an engineering record, not legal advice. Review license obligations before every public binary release.

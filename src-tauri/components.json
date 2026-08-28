@@ -71,15 +71,15 @@
       "display_name": "FFmpeg",
       "version": "n8.1.2-44-g7c533d0f86",
       "recommended": true,
-      "download_url": "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-08-16-13-00/ffmpeg-n8.1.2-44-g7c533d0f86-win64-gpl-8.1.zip",
-      "sha256": "d2425b12dc746a2b044148c6100440d4065876ac4ed6e3eb13a68437b7719796",
+      "download_url": "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-08-16-13-00/ffmpeg-n8.1.2-44-g7c533d0f86-win64-lgpl-8.1.zip",
+      "sha256": "907a6bbc7aa100f5392309c5be4f527d12241121eda1c46db1c62b0054019db1",
       "archive_type": "zip",
       "entrypoint": "ffmpeg.exe",
       "install_directory": "ffmpeg/n8.1.2-44-g7c533d0f86",
-      "download_size_bytes": 169000000,
+      "download_size_bytes": 146088248,
       "required_space_bytes": 650000000,
       "source_url": "https://github.com/BtbN/FFmpeg-Builds",
-      "license": "GPL-3.0-or-later"
+      "license": "LGPL-3.0-or-later"
     }
   ]
 }

@@ -17,6 +17,9 @@ use super::{
     paths::{find_named_file, ComponentPaths},
 };
 
+const MIN_DOWNLOAD_TOLERANCE_BYTES: u64 = 8 * 1024 * 1024;
+const DOWNLOAD_TOLERANCE_DIVISOR: u64 = 20;
+
 #[derive(Debug, Clone, Serialize)]
 pub struct ComponentProgress {
     pub component_id: String,
@@ -170,6 +173,13 @@ async fn download(
             response.status().as_u16()
         )));
     }
+    let maximum_download_size = download_size_limit(artifact);
+    if response
+        .content_length()
+        .is_some_and(|content_length| content_length > maximum_download_size)
+    {
+        return Err(download_size_error(maximum_download_size));
+    }
     let total = response
         .content_length()
         .unwrap_or(artifact.download_size_bytes);
@@ -183,12 +193,19 @@ async fn download(
     while let Some(chunk) = stream.next().await {
         let chunk = chunk
             .map_err(|_| AppError::new("ダウンロード中に接続が切れました。再試行してください。"))?;
+        downloaded = match checked_downloaded_size(downloaded, chunk.len(), maximum_download_size) {
+            Ok(size) => size,
+            Err(error) => {
+                drop(file);
+                let _ = tokio::fs::remove_file(destination).await;
+                return Err(error);
+            }
+        };
         file.write_all(&chunk).await.map_err(|_| {
             AppError::new(
                 "ダウンロードを書き込めませんでした。空き容量と書き込み権限を確認してください。",
             )
         })?;
-        downloaded += chunk.len() as u64;
         emit_progress(
             app,
             artifact,
@@ -202,6 +219,39 @@ async fn download(
         .await
         .map_err(|_| AppError::new("ダウンロード済みファイルを確定できませんでした。"))?;
     Ok(())
+}
+
+fn download_size_limit(artifact: &ComponentArtifact) -> u64 {
+    let tolerance = (artifact.download_size_bytes / DOWNLOAD_TOLERANCE_DIVISOR)
+        .max(MIN_DOWNLOAD_TOLERANCE_BYTES);
+    artifact
+        .download_size_bytes
+        .saturating_add(tolerance)
+        .min(artifact.required_space_bytes)
+}
+
+fn checked_downloaded_size(
+    downloaded: u64,
+    chunk_size: usize,
+    maximum_download_size: u64,
+) -> Result<u64, AppError> {
+    let chunk_size =
+        u64::try_from(chunk_size).map_err(|_| download_size_error(maximum_download_size))?;
+    let next = downloaded
+        .checked_add(chunk_size)
+        .ok_or_else(|| download_size_error(maximum_download_size))?;
+    if next > maximum_download_size {
+        Err(download_size_error(maximum_download_size))
+    } else {
+        Ok(next)
+    }
+}
+
+fn download_size_error(maximum_download_size: u64) -> AppError {
+    AppError::new(format!(
+        "ダウンロード容量が安全上限（約{} MB）を超えたため中止しました。コンポーネント定義が最新か確認して再試行してください。",
+        maximum_download_size / 1_000_000
+    ))
 }
 
 fn verify_sha256(path: &Path, expected: &str) -> Result<(), AppError> {
@@ -315,8 +365,28 @@ fn replace_directory(
 
 #[cfg(test)]
 mod tests {
-    use super::verify_sha256;
+    use super::{checked_downloaded_size, download_size_limit, verify_sha256};
+    use crate::components::manifest::{ArchiveType, ComponentArtifact, ComponentKind};
     use std::io::Write;
+
+    fn test_artifact(download_size_bytes: u64, required_space_bytes: u64) -> ComponentArtifact {
+        ComponentArtifact {
+            id: "test".into(),
+            kind: ComponentKind::Ffmpeg,
+            display_name: "Test".into(),
+            version: "1".into(),
+            recommended: false,
+            download_url: "https://example.com/test.zip".into(),
+            sha256: "0".repeat(64),
+            archive_type: ArchiveType::Zip,
+            entrypoint: "test.exe".into(),
+            install_directory: "test/1".into(),
+            download_size_bytes,
+            required_space_bytes,
+            source_url: "https://example.com".into(),
+            license: "MIT".into(),
+        }
+    }
 
     #[test]
     fn verifies_sha256_before_installing() {
@@ -328,5 +398,20 @@ mod tests {
         )
         .is_ok());
         assert!(verify_sha256(file.path(), &"0".repeat(64)).is_err());
+    }
+
+    #[test]
+    fn download_limit_allows_tolerance_but_not_required_space_overrun() {
+        let small = test_artifact(100_000_000, 500_000_000);
+        assert_eq!(download_size_limit(&small), 108_388_608);
+
+        let constrained = test_artifact(100_000_000, 104_000_000);
+        assert_eq!(download_size_limit(&constrained), 104_000_000);
+    }
+
+    #[test]
+    fn rejects_chunk_that_crosses_download_limit() {
+        assert_eq!(checked_downloaded_size(90, 10, 100).unwrap(), 100);
+        assert!(checked_downloaded_size(100, 1, 100).is_err());
     }
 }

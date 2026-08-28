@@ -2,6 +2,12 @@
   "name": "misfo-shift-transcriber",
   "private": true,
   "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MisfoShift/MisfoShiftTranscriber.git"
+  },
+  "homepage": "https://misfoshift.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +15,8 @@
     "test": "vitest run",
     "tauri": "tauri",
     "tauri:dev:windows": "scripts\\tauri-windows.cmd dev",
-    "tauri:build:windows": "scripts\\tauri-windows.cmd build"
+    "tauri:build:windows": "scripts\\tauri-windows.cmd build",
+    "release:checksums": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-release-checksums.ps1"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.0.0",

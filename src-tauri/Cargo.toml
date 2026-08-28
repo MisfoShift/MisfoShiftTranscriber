@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "A local-first Windows transcription tool"
 authors = ["MisfoShift"]
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/MisfoShift/MisfoShiftTranscriber"
+homepage = "https://misfoshift.com"
 
 [lib]
 name = "misfo_shift_transcriber_lib"
