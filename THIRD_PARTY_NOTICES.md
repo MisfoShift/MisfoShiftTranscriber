@@ -38,17 +38,17 @@ MisfoShiftTranscriber can use an existing FFmpeg executable or download the pinn
 - FFmpeg project: <https://ffmpeg.org/>
 - FFmpeg source: <https://ffmpeg.org/download.html>
 - Build project: <https://github.com/BtbN/FFmpeg-Builds>
-- Build release tag: `autobuild-2026-08-16-13-00`
-- FFmpeg version/build identifier: `n8.1.2-44-g7c533d0f86-20260816`
-- FFmpeg source revision: `7c533d0f86`
-- BtbN FFmpeg-Builds commit: `590a6612d7d961e9258429e501619e0b7d7cbedf`
-- Artifact: `ffmpeg-n8.1.2-44-g7c533d0f86-win64-lgpl-8.1.zip`
-- Artifact size: `146,088,248` bytes
-- Artifact SHA-256: `907a6bbc7aa100f5392309c5be4f527d12241121eda1c46db1c62b0054019db1`
+- Build release tag: `autobuild-2026-08-31-13-27` (monthly retained build)
+- FFmpeg version/build identifier: `n8.1.2-50-g1a748fe2cd-20260831`
+- FFmpeg source revision: `1a748fe2cd`
+- BtbN FFmpeg-Builds commit: `8267213e26c1031621e6e1210fe3aa4867214f6a`
+- Artifact: `ffmpeg-n8.1.2-50-g1a748fe2cd-win64-lgpl-8.1.zip`
+- Artifact size: `146,078,616` bytes
+- Artifact SHA-256: `f6274bbd9c247f9e90c1bbed066b03ed4a3907cece2fb91be6dd352393936365`
 - Build options include `--enable-version3`; `--enable-gpl` and `--enable-nonfree` are not enabled
 - Binary license: GNU Lesser General Public License, version 3 or later (`LGPL-3.0-or-later`)
 - LGPL text: <https://www.gnu.org/licenses/lgpl-3.0.html>
-- Exact revision lookup: <https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/7c533d0f86>
+- Exact revision lookup: <https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/1a748fe2cd>
 
 FFmpeg is executed as an external program. The application downloads the unmodified archive directly from the BtbN GitHub Release and verifies the pinned digest. Downloading a binary on a user's machine does not place it in this source repository.
 

@@ -16,6 +16,8 @@ Use a clean VM or PC for each OS. Record `OK`, `NG`, or `N/A` and add evidence o
 
 | Check | Windows 10 | Windows 11 | Notes / issue |
 | --- | --- | --- | --- |
+| Git history author names and email addresses are approved for public disclosure | [ ] | [ ] | |
+| Tracked files contain no credentials, local absolute paths, or unintended binary artifacts | [ ] | [ ] | |
 | Installer SHA-256 matches `SHA256SUMS.txt` | [ ] | [ ] | |
 | MSI installation completes | [ ] | [ ] | |
 | NSIS installation completes | [ ] | [ ] | |

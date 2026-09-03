@@ -2,6 +2,10 @@
 
 This document covers repeatable checks for a public Windows release. It does not authorize publishing, signing, or uploading artifacts.
 
+## Repository publication audit
+
+Before making the repository public, inspect both tracked files and Git history. Confirm that local absolute paths, credentials, tokens, private keys, personal contact details, and unintended binary artifacts are absent. Git author names and email addresses are part of the public history; approve them explicitly or rewrite the unpublished history before publication. Also confirm that `.gitignore` excludes downloaded components, application settings, temporary files, and build outputs.
+
 ## Dependency vulnerability audit
 
 Run the following from PowerShell with network access. Review every finding instead of applying `--force` updates automatically.

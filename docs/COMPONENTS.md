@@ -29,6 +29,7 @@ For every component update:
 6. Update `components.json`, `THIRD_PARTY_NOTICES.md`, and relevant README text together.
 7. Test a clean install, interrupted download, digest mismatch, re-download, and offline transcription.
 8. Keep whisper.cpp, model files, and FFmpeg out of the default application bundle. If a future release bundles FFmpeg, archive its license text, corresponding source, and matching BtbN build definitions as required by the LGPL.
+9. For BtbN, pin the last successful monthly build covered by the upstream two-year retention policy. Do not pin an ordinary daily build, which is retained only temporarily. See the [BtbN release retention policy](https://github.com/BtbN/FFmpeg-Builds#release-retention-policy).
 
 ## Network policy
 
@@ -40,6 +41,6 @@ Downloads are written to a temporary directory under the application-data compon
 
 - whisper.cpp `1.9.0`, Windows x64 CPU release, MIT.
 - Whisper `small`, `medium`, and `large-v3` multilingual ggml models, MIT-designated upstream repository.
-- BtbN FFmpeg `n8.1.2-44-g7c533d0f86` Windows x64 LGPL static build, LGPL-3.0-or-later.
+- BtbN FFmpeg `n8.1.2-50-g1a748fe2cd` Windows x64 LGPL static monthly build, LGPL-3.0-or-later.
 
 See `THIRD_PARTY_NOTICES.md` for the exact artifacts and redistribution notes.
